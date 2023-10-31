@@ -69,7 +69,7 @@ if sys.platform == "linux":
 		foundTerm = False
 		for termEXE in possibleTerminals:
 			if shutil.which(termEXE) != None:
-				print("Found Terminal: " + termEXE + ", attempting to re-launch...")
+				print(f"Found Terminal: [termEXE], attempting to re-launch...")
 				Popen([termEXE, "-e", *sys.argv], stdin=None, stdout=None, stderr=None, close_fds=True)
 				foundTerm = True
 				break
@@ -117,7 +117,7 @@ remoteVersion = 0
 systemProxies = urllib.request.getproxies()
 
 if systemProxies:
-	print("System Proxies:\n" + str(systemProxies) + "\n")
+	print(f"System Proxies:\n[str(systemProxies]\n")
 
 with open(getattr(sys, "frozen", False) and os.path.join(sys._MEIPASS, "version.txt") or "version.txt", "r") as versionFile:
 	localVersion = int(versionFile.read())
@@ -133,7 +133,7 @@ try:
 
 			secsToContinue = 5
 			while secsToContinue:
-				print(colored("\tContinuing in " + str(secsToContinue) + " seconds...", "yellow"), end="\r")
+				print(colored(f"\tContinuing in [str(secsToContinue)] seconds...", "yellow"), end="\r")
 				sleep(1)
 				secsToContinue -= 1
 
@@ -203,7 +203,7 @@ elif sys.platform == "darwin":
 	if os.path.isdir(os.path.join(homeDir, "Library", "Application Support", "Steam")):
 		steamPath = os.path.join(homeDir, "Library", "Application Support", "Steam")
 
-	steamPathHints["darwin"] = "Is it installed somewhere other than " + os.path.join(homeDir, "Library", "Application Support", "Steam") + " ?"
+	steamPathHints["darwin"] = f"Is it installed somewhere other than [os.path.join(homeDir, "Library", "Application Support", "Steam")] ?"
 else:
 	# Linux
 	dataDir = str(XDG_DATA_HOME)
@@ -215,7 +215,7 @@ else:
 	elif os.path.isdir(os.path.join(dataDir, "Steam")):
 		steamPath = os.path.join(dataDir, "Steam")
 
-	steamPathHints["linux"] = "Is it installed somewhere other than " + os.path.join(homeDir, ".steam", "steam") + " or " + os.path.join(dataDir, "Steam") + " ?"
+	steamPathHints["linux"] = f"Is it installed somewhere other than [os.path.join(homeDir, ".steam", "steam")] or [os.path.join(dataDir, "Steam")] ?"
 
 if steamPath:
 	steamPath = os.path.normcase(os.path.realpath(steamPath))
@@ -295,7 +295,7 @@ for path in steamLibraries:
 		curGModPath = os.path.join(path, *curGModPath)
 		if os.path.isdir(curGModPath):
 			if foundGMod:
-				sys.exit(colored("Error: Multiple Garry's Mod Installations Detected!\nPlease manually remove the unused version(s):\n\t" + gmodPath + "\n\t" + curGModPath + "\nYou will also have to delete steamapps/appmanifest_4000.acf ON THE SAME DRIVE AS THE GMOD YOU DELETE." + contactInfo, "red"))
+				sys.exit(colored(f"Error: Multiple Garry's Mod Installations Detected!\nPlease manually remove the unused version(s):\n\t[gmodPath]\n\t[curGModPath]\nYou will also have to delete steamapps/appmanifest_4000.acf ON THE SAME DRIVE AS THE GMOD YOU DELETE.[contactInfo]", "red"))
 			else:
 				foundGMod = True
 				gmodPath = curGModPath
@@ -323,7 +323,7 @@ for path in steamLibraries:
 
 			if curGModManifestStr:
 				if foundGModManifest:
-					sys.exit(colored("Error: Multiple Garry's Mod App Manifests Detected!\nPlease manually remove the unused version(s):\n\t" + gmodManifestPath + "\n\t" + curGModManifestPath + contactInfo, "red"))
+					sys.exit(colored(f"Error: Multiple Garry's Mod App Manifests Detected!\nPlease manually remove the unused version(s):\n\t[gmodManifestPath]\n\t[curGModManifestPath + contactInfo]", "red"))
 				else:
 					foundGModManifest = True
 					gmodManifestPath = curGModManifestPath
@@ -371,7 +371,7 @@ if sys.platform == "linux":
 
 				secsToContinue = 5
 				while secsToContinue:
-					print(colored("\tContinuing in " + str(secsToContinue) + " seconds...", "yellow"), end="\r")
+					print(colored(f"\tContinuing in [str(secsToContinue)] seconds...", "yellow"), end="\r")
 					sleep(1)
 					secsToContinue -= 1
 				sys.stdout.write("\033[K\n")
@@ -428,7 +428,7 @@ with open(steamAppInfoPath, "rb") as steamAppInfoFile:
 
 gmodEXELaunchOptionsLen = len(gmodEXELaunchOptions)
 if gmodEXELaunchOptionsLen > 0:
-	print("GMod EXE Launch Options Detected: " + str(gmodEXELaunchOptionsLen) + "\n")
+	print(f"GMod EXE Launch Options Detected: [str(gmodEXELaunchOptionsLen)]\n")
 else:
 	sys.exit(colored("Error: Could not detect GMod EXE Launch Options!" + contactInfo, "red"))
 
